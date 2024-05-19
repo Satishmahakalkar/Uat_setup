@@ -1,0 +1,52 @@
+<!DOCTYPE html>
+<body>
+    <h4>Trades for {{ account.name }}</h4>
+    <br>
+    {% if long_entrys %}
+    <h5>Long Entries</h5>
+    <p>
+        {% for side, qty, symbol, price in long_entrys %}
+        {{ side|upper }} {{ qty }} quantity of {{ symbol }} at Market price (₹ {{ price }})<br>
+        {% endfor %}
+    </p>
+    {% else %}
+    <h5>No long entries</h5>
+    {% endif %}
+    <br>
+    {% if long_exits %}
+    <h5>Long Exits</h5>
+    <p>
+        {% for side, qty, symbol, price in long_exits %}
+        {{ side|upper }} {{ qty }} quantity of {{ symbol }} at Market price (₹ {{ price }})<br>
+        {% endfor %}
+    </p>
+    {% else %}
+    <h5>No long exits</h5>
+    {% endif %}
+    <br>
+    {% if short_entrys %}
+    <h5>Short Entries</h5>
+    <p>
+        {% for side, qty, symbol, price in short_entrys %}
+        {{ side|upper }} {{ qty }} quantity of {{ symbol }} at Market price (₹ {{ price }})<br>
+        {% endfor %}
+    </p>
+    {% else %}
+    <h5>No short entries</h5>
+    {% endif %}
+    <br>
+    {% if short_exits %}
+    <h5>Short Exits</h5>
+    <p>
+        {% for side, qty, symbol, price in short_exits %}
+        {{ side|upper }} {{ qty }} quantity of {{ symbol }} at Market price (₹ {{ price }})<br>
+        {% endfor %}
+    </p>
+    {% else %}
+    <h5>No short exits</h5>
+    {% endif %}
+    <br>
+    <p>The prices in bracket are for indication only please place trade according to Market prices.</p>
+    <p>Please note above trades are for tracking purposes only. No trades are to be executed.</p>
+</body>
+</html>

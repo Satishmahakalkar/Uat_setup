@@ -1,0 +1,24 @@
+Trades for {{ account.name }}
+
+Long buys:
+{% for side, qty, symbol, price in long_entrys %}
+{{ side|upper }} {{ qty }} quantity of {{ symbol }} at Market price (₹ {{ price }})
+{% endfor %}
+
+Long exits:
+{% for side, qty, symbol, price in long_exits %}
+{{ side|upper }} {{ qty }} quantity of {{ symbol }} at Market price (₹ {{ price }})
+{% endfor %}
+
+Short sells:
+{% for side, qty, symbol, price in short_entrys %}
+{{ side|upper }} {{ qty }} quantity of {{ symbol }} at Market price (₹ {{ price }})
+{% endfor %}
+
+Short exits:
+{% for side, qty, symbol, price in short_exits %}
+{{ side|upper }} {{ qty }} quantity of {{ symbol }} at Market price (₹ {{ price }})
+{% endfor %}
+
+The prices in bracket are for indication only please place trade according to Market prices.
+Please note above trades are for tracking purposes only. No trades are to be executed.

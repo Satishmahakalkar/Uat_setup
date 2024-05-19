@@ -1,0 +1,10 @@
+{%- for trade in trades %}
+    {%- if trade.instrument.future %}
+        {%- set inst = trade.instrument.future %}
+        {%- set stk = "FUTSTK" %}
+    {%- elif trade.instrument.option %}
+        {%- set inst = trade.instrument.option %}
+        {%- set stk = "OPTSTK" %}
+    {%- endif %}
+{{ loop.index }},O,U,1,0,{% if trade.side.name == 'BUY' %}1{% else %}2{% endif %},{{ stk }},{{ inst.stock.ticker }},{{ inst.expiry.strftime("%d%b%Y")|upper }},{{ inst.strike }},{% if inst.option_type %}{{ inst.option_type.value }}{% endif %},1,,,,0.00,,{{ trade.qty }},,,2,{{ client_account_id }},,,,2,
+{%- endfor %}

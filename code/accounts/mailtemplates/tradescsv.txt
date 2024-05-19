@@ -1,0 +1,8 @@
+Segment,Instrument,Symbol,Option ,Strike,Expiry Date,Price,QTY,,Buy/Sell,Limit,,Pro/Cli,,Validity,Account id,NA,,,,
+{%- for trade in trades %}
+{%- if trade.instrument.future %}
+NFO,FUTSTK,{{ trade.instrument.future.stock.ticker }},NA,NA,{{ trade.instrument.future.expiry.strftime("%d/%m/%Y") }},0.00,{{ trade.qty }},NA,{{ trade.side.name }},MARKET,NA,CLI,NRML,DAY,{{ client_account_id }},NA,,,NA,NA
+{%- elif trade.instrument.option %}
+NFO,OPTSTK,{{ trade.instrument.option.stock.ticker }},{{ trade.instrument.option.option_type.value }},{{ trade.instrument.option.strike }},{{ trade.instrument.option.expiry.strftime("%d/%m/%Y") }},0.00,{{ trade.qty }},NA,{{ trade.side.name }},MARKET,NA,CLI,NRML,DAY,{{ client_account_id }},NA,,,NA,NA
+{%- endif %}
+{%- endfor %}

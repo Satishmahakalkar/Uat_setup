@@ -1,0 +1,37 @@
+<html>
+    <body>
+        <h4>SRE Orders</h4>
+        <table>
+            <thead>
+                <tr>
+                    <th>Account</th>
+                    <th>AppOrderId</th>
+                    <th>Ticker</th>
+                    <th>Side</th>
+                    <th>OrderStatus</th>
+                    <th>Price</th>
+                    <th>Time</th>
+                </tr>
+            </thead>
+            <tbody>
+                {%- for sre_order in sre_orders %}
+                <tr>
+                    <td>{{ sre_order.sre_account.account.name }}</td>
+                    <td>{{ sre_order.app_order_id }}</td>
+                    {%- if sre_order.trade.instrument.future %}
+                    <td>{{ sre_order.trade.instrument.future.stock.ticker }} FUT {{ sre_order.trade.instrument.future.expiry }}</td>
+                    {%- elif sre_order.trade.instrument.option %}
+                    <td>{{ sre_order.trade.instrument.option.stock.ticker }} {{ sre_order.trade.instrument.option.strike }} {{ sre_order.trade.instrument.option.option_type.value }} {{ sre_order.trade.instrument.option.expiry }}</td>
+                    {%- else %}
+                    <td>{{ sre_order.trade.instrument.stock.ticker }}</td>
+                    {%- endif %}
+                    <td>{{ sre_order.trade.side.name }}</td>
+                    <td>{{ sre_order.status }}</td>
+                    <td>{{ sre_order.trade.price }}</td>
+                    <td>{{ sre_order.timestamp.strftime("%Y-%m-%d %H-%M-%S") }}</td>
+                </tr>
+                {%- endfor %}
+            </tbody>
+        </table>
+    </body>
+</html>

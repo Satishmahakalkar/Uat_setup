@@ -1,0 +1,10 @@
+Account | AppOrderId | ticker | side | orderstatus
+{%- for sre_order in sre_orders %}
+{%- if sre_order.trade.instrument.future %}
+{{ sre_order.sre_account.account.name }}| {{ sre_order.app_order_id }} | {{ sre_order.trade.instrument.future.stock.ticker }} FUT {{ sre_order.trade.instrument.future.expiry }} | {{ sre_order.trade.side.name }} | {{ sre_order.status }}
+{%- elif sre_order.trade.instrument.option %}
+{{ sre_order.sre_account.account.name }}| {{ sre_order.app_order_id }} | {{ sre_order.trade.instrument.option.stock.ticker }} {{ sre_order.trade.instrument.option.strike }} {{ sre_order.trade.instrument.option.option_type.value }} {{ sre_order.trade.instrument.option.expiry }} | {{ sre_order.trade.side.name }} | {{ sre_order.status }}
+{%- else %}
+{{ sre_order.sre_account.account.name }}| {{ sre_order.app_order_id }} | {{ sre_order.trade.instrument.stock.ticker }} | {{ sre_order.trade.side.name }} | {{ sre_order.status }}
+{%- endif %}
+{%- endfor %}

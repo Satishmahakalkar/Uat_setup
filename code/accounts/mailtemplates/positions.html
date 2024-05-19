@@ -1,0 +1,14 @@
+<h4>Positions on {{ date }} for account: {{ account.name }}</h4>
+<br>
+<h5>Long positions:</h5>
+<p>
+    {% for symbol, pos in long_positions %}
+    {{ symbol }} of {{ pos.qty }} quantity <br>
+    {% endfor %}
+</p>
+<h5>Short positions:</h5>
+<p>
+    {% for symbol, pos in short_positions %}
+    {{ symbol }} of {{ pos.qty }} quantity <br>
+    {% endfor %}
+</p>

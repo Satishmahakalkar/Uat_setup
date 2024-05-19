@@ -1,0 +1,12 @@
+Positions on {{ date }} for account: {{ account.name }}
+
+Long positions:
+{% for symbol, pos in long_positions %}
+{{ symbol }} of {{ pos.qty }} quantity
+{% endfor %}
+
+Short positions:
+{% for symbol, pos in short_positions %}
+{{ symbol }} of {{ pos.qty }} quantity
+{% endfor %}
+

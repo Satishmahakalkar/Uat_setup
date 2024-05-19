@@ -1,0 +1,14 @@
+Buy/Sell,Basket Id,Group Id,Order Type,Exchange,Instrument Type,Instrument Name,Symbol,Expiry Date,Strike Price,Option Type,Lots,Quantity,Limit,Client Id,NOE Mapping ID,COL,Trade Instruction,Unique Identifier,Dealing Instruction,Vol Condition,PV Comp,Vol Phase,Booking Ref,EOMSID,Validity,GTD Date,Dollar/Val Fig,Conv Rate,$
+{%- for trade in trades %}
+    {%- if trade.instrument.future %}
+        {%- set inst = trade.instrument.future %}
+        {%- set stk = "FUTSTK" %}
+    {%- elif trade.instrument.option %}
+        {%- set inst = trade.instrument.option %}
+        {% set stk = "OPTSTK" %}
+    {%- else %}
+        {%- set inst = trade.instrument.stock %}
+        {%- set stk = "STK" %}
+    {%- endif %}
+{% if trade.side.name == 'BUY' %}1{% else %}2{% endif %},,HO,14,0,{{ stk[0] }},{{ stk }},{{ inst.stock.ticker }},{{ inst.expiry.strftime("%d%b%y") | upper }},{{ inst.strike }},{% if inst.option_type %}inst.option_type.value{% endif %},{{ (trade.qty / inst.lot_size) | int }},{{ trade.qty }},,{{ client_account_id }},,Y,,,,,,,,,1,,,,$
+{%- endfor %}
